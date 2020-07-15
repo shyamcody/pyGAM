@@ -260,6 +260,10 @@ def test_predict_terms_output(mcycle_X_y):
     n,m = x.shape
     assert(len(terms) == m)
     assert(len(terms[0]) == n)
+    try:
+        terms = gam.predict(x,output = "shyambhu")
+    except:
+        assert(True)
     
 class TestSamplingFromPosterior(object):
 
