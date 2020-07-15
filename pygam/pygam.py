@@ -416,7 +416,7 @@ class GAM(Core, MetaTermMixin):
         lp = self._linear_predictor(X)
         return self.link.mu(lp, self.distribution)
 
-    def predict(self, X, type_ = "response"):
+    def predict(self, X, output = "response"):
         """
         preduct expected value of target given model and input X
         often this is done via expected value of GAM given input X
@@ -425,20 +425,27 @@ class GAM(Core, MetaTermMixin):
         ---------
         X : array-like of shape (n_samples, m_features)
             containing the input dataset
+        
+        output : str in {'response','terms'}
+                response to provide prediction values.
+                terms to provide the terms values in linear portion.
 
         Returns
         -------
+        
         y : np.array of shape (n_samples,)
             containing predicted values under the model
-        
-        type_ : str in {'response','terms'}
-                response to provide prediction values.
-                terms to provide the terms values in linear portion.
+            if output is set to response.
+            
+            or 
+            list of Numpy arrays of shape (n_samples,)
+            containing partial contributions of each term in each numpy array.
+            if output is set to terms.
         """
-        if type_ not in ['response','terms']:
-            raise ValueError('type_ not equal to response or terms.')
-        if type_ == 'terms':
-            term_values = [self._linear_predictor(X,term = term) for term in self.terms]
+        if output not in ['response','terms']:
+            raise ValueError('output not equal to response or terms.')
+        if output == 'terms':
+            term_values = [self.partial_dependence(term = i,X = X) for i,term in enumerate(self.terms) if not term.isintercept]
             return term_values
         return self.predict_mu(X)
 

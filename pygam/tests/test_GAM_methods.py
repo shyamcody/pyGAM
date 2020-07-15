@@ -250,7 +250,17 @@ def test_get_params():
     params = gam.get_params()
     assert(params['lam'] == 420)
 
-
+def test_predict_terms_output(self,mcycle_X_y):
+    """
+    test to check output = 'terms' in GAM.predict()
+    """
+    x,y = mcycle_X_y
+    gam = LinearGAM().fit(x,y)
+    terms = gam.predict(x,output = "terms")
+    n,m = x.shape
+    assert(len(terms) == m)
+    assert(len(terms[0]) == n)
+    
 class TestSamplingFromPosterior(object):
 
     def test_drawing_samples_from_unfitted_model(self, mcycle_X_y, mcycle_gam):
