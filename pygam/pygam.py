@@ -1254,7 +1254,7 @@ class GAM(Core, MetaTermMixin):
         based on equations from Wood 2006 section 4.8.5 page 191
         and errata https://people.maths.bris.ac.uk/~sw15190/igam/iGAMerrata-12.pdf
 
-        the errata shows a correction for the f-statisitc.
+        the errata shows a correction for the f-statistics.
         """
         if not self._is_fitted:
             raise AttributeError('GAM has not been fitted. Call fit first.')
