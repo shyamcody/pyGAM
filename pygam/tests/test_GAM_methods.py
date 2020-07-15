@@ -250,7 +250,7 @@ def test_get_params():
     params = gam.get_params()
     assert(params['lam'] == 420)
 
-def test_predict_terms_output(self,mcycle_X_y):
+def test_predict_terms_output(mcycle_X_y):
     """
     test to check output = 'terms' in GAM.predict()
     """
