@@ -17,16 +17,16 @@ def test_LinearGAM_prediction(mcycle_X_y, mcycle_gam):
     preds = mcycle_gam.predict(X)
     assert(preds.shape == y.shape)
 
-#def test_gamma(mcycle_X_y):
-#    """
-#    check that if we can fit with not default gamma parameter
-#    """
-#    X,y = mcycle_X_y
-#    gam = LinearGAM(gamma = 3)
-#    try:
-#        gam = LinearGAM(gamma = -1.0)
-#    except ValueError:
-#        assert(True)
+def test_gamma(mcycle_X_y):
+    """
+    check that if we can fit with not default gamma parameter
+    """
+    X,y = mcycle_X_y
+    gam = LinearGAM(gamma = 3)
+    try:
+        gam = LinearGAM(gamma = -1.0)
+    except ValueError:
+        assert(True)
 def test_LogisticGAM_accuracy(default_X_y):
     """
     check that we can compute accuracy correctly
